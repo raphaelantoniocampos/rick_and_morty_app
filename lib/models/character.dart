@@ -1,4 +1,6 @@
 import 'package:rick_and_morty_app/models/location.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Character {
   final int id;

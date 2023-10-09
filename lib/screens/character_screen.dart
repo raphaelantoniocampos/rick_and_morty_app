@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:rick_and_morty_app/widgets/character_card.dart';
+import 'package:rick_and_morty_app/contants.dart';
+import 'package:rick_and_morty_app/widgets/character_preview.dart';
 import 'package:rick_and_morty_app/models/character.dart';
 
 class CharacterScreen extends StatefulWidget {
@@ -29,14 +30,22 @@ class _CharacterScreenState extends State<CharacterScreen> {
     );
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      setState(() {
-        characters.addAll(jsonData['results']);
-        currentPage++;
+      final List<dynamic> results = jsonData['results'];
 
-        // if(jsonData['info']['next'] != null){
-        //   fetchCharacters();
-        // }
-      });
+      for (var result in results){
+        final characterUrl = result['url'];
+        final characterResponse = await http.get(Uri.parse(characterUrl));
+
+        if (characterResponse.statusCode == 200) {
+          final characterJson = json.decode(characterResponse.body);
+          final character = Character.fromJson(characterJson);
+          setState(() {
+            characters.add(character);
+          });
+        } else {
+            throw Exception('Failed to load character');
+          }
+      }
     } else {
       throw Exception('Failed to load characters');
     }
@@ -46,18 +55,41 @@ class _CharacterScreenState extends State<CharacterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        leading: Icon(Icons.person, color: Colors.white,),
-        actions: [Icon(Icons.search, color: Colors.white,),]
+        backgroundColor: Colors.white,
+        leading: Icon(
+          Icons.person, color: primaryColor,),
+        actions: [
+          Icon(
+            Icons.search, color: primaryColor,),
+            ]
       ),
-      body: ListView.builder(
-            itemCount: characters.length,
-            itemBuilder: (context, index){
-              final characterJson = characters[index];
-              final character = Character.fromJson(characterJson);
-              return CharacterCard(character: character);
-            }
-          ), 
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Characters',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: primaryColor,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 400,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: characters.length,
+              itemBuilder: (context, index){
+                return CharacterPreview(character: characters[index]);
+              }
+            ),
+          ),
+        ],
+      ), 
     );
   }
 }

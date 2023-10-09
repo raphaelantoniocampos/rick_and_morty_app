@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty_app/contants.dart';
 import 'package:rick_and_morty_app/screens/character_screen.dart';
 import 'package:rick_and_morty_app/screens/episode_screen.dart';
 import 'package:rick_and_morty_app/screens/location_screen.dart';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.blue,
+        backgroundColor: primaryColor,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
