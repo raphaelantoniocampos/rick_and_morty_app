@@ -65,7 +65,7 @@ class _CharacterDetailsScreenState extends State<CharacterDetailsScreen> {
             height: 15,
             ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
