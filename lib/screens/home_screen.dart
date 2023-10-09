@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/contants.dart';
-import 'package:rick_and_morty_app/screens/character_screen.dart';
+import 'package:rick_and_morty_app/screens/character_list_screen.dart';
 import 'package:rick_and_morty_app/screens/episode_screen.dart';
 import 'package:rick_and_morty_app/screens/location_screen.dart';
 
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 List<Widget> pages = const [
-  CharacterScreen(),
+  CharacterListScreen(),
   LocationScreen(),
   EpisodeScreen(),
 ];

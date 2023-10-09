@@ -5,14 +5,14 @@ import 'package:rick_and_morty_app/contants.dart';
 import 'package:rick_and_morty_app/widgets/character_preview.dart';
 import 'package:rick_and_morty_app/models/character.dart';
 
-class CharacterScreen extends StatefulWidget {
-  const CharacterScreen({super.key});
+class CharacterListScreen extends StatefulWidget {
+  const CharacterListScreen({super.key});
 
   @override
-  State<CharacterScreen> createState() => _CharacterScreenState();
+  State<CharacterListScreen> createState() => _CharacterScreenState();
 }
 
-class _CharacterScreenState extends State<CharacterScreen> {
+class _CharacterScreenState extends State<CharacterListScreen> {
   List<dynamic> characters = [];
   int currentPage = 40;
 
