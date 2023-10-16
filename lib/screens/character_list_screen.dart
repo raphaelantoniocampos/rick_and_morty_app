@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:rick_and_morty_app/contants.dart';
+import 'package:provider/provider.dart';
+import 'package:rick_and_morty_app/constants.dart';
 import 'package:rick_and_morty_app/widgets/character_preview.dart';
-import 'package:rick_and_morty_app/models/character.dart';
+import 'package:rick_and_morty_app/controllers/character_controller.dart'; 
+
 
 class CharacterListScreen extends StatefulWidget {
   const CharacterListScreen({super.key});
@@ -13,43 +13,16 @@ class CharacterListScreen extends StatefulWidget {
 }
 
 class _CharacterScreenState extends State<CharacterListScreen> {
-  List<dynamic> characters = [];
-  int currentPage = 40;
+  late CharacterController _characterController;
 
 
   @override
-  void initState(){
-    super.initState();
-    fetchCharacters();
+  void didChangeDependencies() {
+    _characterController = Provider.of<CharacterController>(context);
+    _characterController.fetchCharacters();    
+    super.didChangeDependencies();
   }
-
-  Future<void> fetchCharacters() async {
-    // final apiUrl = 'https://rickandmortyapi.com/api/character?page=$currentPage';
-    final response = await http.get(
-      Uri.parse('https://rickandmortyapi.com/api/character'),
-    );
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      final List<dynamic> results = jsonData['results'];
-
-      for (var result in results){
-        final characterUrl = result['url'];
-        final characterResponse = await http.get(Uri.parse(characterUrl));
-
-        if (characterResponse.statusCode == 200) {
-          final characterJson = json.decode(characterResponse.body);
-          final character = Character.fromJson(characterJson);
-          setState(() {
-            characters.add(character);
-          });
-        } else {
-            throw Exception('Failed to load character');
-          }
-      }
-    } else {
-      throw Exception('Failed to load characters');
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +41,7 @@ class _CharacterScreenState extends State<CharacterListScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Text(
               'Characters',
               style: TextStyle(
@@ -82,9 +55,10 @@ class _CharacterScreenState extends State<CharacterListScreen> {
             height: 400,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: characters.length,
+              itemCount: _characterController.characters.length,
               itemBuilder: (context, index){
-                return CharacterPreview(character: characters[index]);
+                final character = _characterController.characters[index];
+                return CharacterPreview(character: character);
               }
             ),
           ),
