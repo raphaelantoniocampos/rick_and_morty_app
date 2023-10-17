@@ -4,7 +4,6 @@ import 'package:rick_and_morty_app/screens/character_list_screen.dart';
 import 'package:rick_and_morty_app/screens/episode_screen.dart';
 import 'package:rick_and_morty_app/screens/location_list_screen.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -26,28 +25,25 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: primaryColor,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              size: 30,
-            ),
-            label: "Characters"
-          ),
+              icon: Icon(
+                Icons.person,
+                size: 30,
+              ),
+              label: "Characters"),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.location_city,
-              size: 30,
-            ),
-            label: "Locations"
-          ),
+              icon: Icon(
+                Icons.location_city,
+                size: 30,
+              ),
+              label: "Locations"),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.movie,
-              size: 30,
-            ),
-            label: "Episodes"
-          ),
+              icon: Icon(
+                Icons.movie,
+                size: 30,
+              ),
+              label: "Episodes"),
         ],
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             _page = index;
           });

@@ -5,7 +5,13 @@ class InfoText extends StatelessWidget {
   final Color firstColor;
   final String secondText;
   final Color secondColor;
-  const InfoText({super.key, required this.firstText, required this.firstColor, required this.secondText, required this.secondColor});
+
+  const InfoText(
+      {super.key,
+      required this.firstText,
+      required this.firstColor,
+      required this.secondText,
+      required this.secondColor});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +21,19 @@ class InfoText extends StatelessWidget {
         children: [
           Text(
             "$firstText: ",
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: firstColor,
+            ),
           ),
-          Text(secondText,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          Text(
+            secondText,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: secondColor,
+            ),
           ),
         ],
       ),

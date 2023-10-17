@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty_app/constants.dart';
 import 'package:rick_and_morty_app/widgets/character_preview.dart';
-import 'package:rick_and_morty_app/controllers/character_controller.dart'; 
-
+import 'package:rick_and_morty_app/controllers/character_controller.dart';
 
 class CharacterListScreen extends StatefulWidget {
   const CharacterListScreen({super.key});
@@ -15,27 +14,28 @@ class CharacterListScreen extends StatefulWidget {
 class _CharacterScreenState extends State<CharacterListScreen> {
   late CharacterController _characterController;
 
-
   @override
   void didChangeDependencies() {
     _characterController = Provider.of<CharacterController>(context);
-    _characterController.fetchCharacters();    
+    _characterController.fetchCharacters();
     super.didChangeDependencies();
   }
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: Icon(
-          Icons.person, color: primaryColor,),
-        actions: [
-          Icon(
-            Icons.search, color: primaryColor,),
-            ]
-      ),
+          backgroundColor: Colors.white,
+          leading: Icon(
+            Icons.person,
+            color: primaryColor,
+          ),
+          actions: [
+            Icon(
+              Icons.search,
+              color: primaryColor,
+            ),
+          ]),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,16 +54,15 @@ class _CharacterScreenState extends State<CharacterListScreen> {
           SizedBox(
             height: 400,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _characterController.characters.length,
-              itemBuilder: (context, index){
-                final character = _characterController.characters[index];
-                return CharacterPreview(character: character);
-              }
-            ),
+                scrollDirection: Axis.horizontal,
+                itemCount: _characterController.characters.length,
+                itemBuilder: (context, index) {
+                  final character = _characterController.characters[index];
+                  return CharacterPreview(character: character);
+                }),
           ),
         ],
-      ), 
+      ),
     );
   }
 }

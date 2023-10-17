@@ -12,7 +12,11 @@ class CharacterPreview extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CharacterDetailsScreen(character : character)));
+          context,
+          MaterialPageRoute(
+            builder: (context) => CharacterDetailsScreen(character: character),
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -32,12 +36,13 @@ class CharacterPreview extends StatelessWidget {
                   width: 180,
                   height: 250,
                   fit: BoxFit.cover,
-                  ),
+                ),
               ),
-              ),
-            Text(character.name, style: const TextStyle(
-              fontWeight: FontWeight.bold
-            ),),
+            ),
+            Text(
+              character.name,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             Text("${character.species}, ${character.status}"),
           ],
         ),
