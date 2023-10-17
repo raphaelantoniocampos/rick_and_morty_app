@@ -25,7 +25,6 @@ class _CharacterScreenState extends State<CharacterListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
           leading: Icon(
             Icons.person,
             color: primaryColor,

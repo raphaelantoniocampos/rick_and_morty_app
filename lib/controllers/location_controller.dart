@@ -34,9 +34,9 @@ class LocationController extends ChangeNotifier {
 
   Future<void> fetchResidents(residentsUrls) async {
     residents.clear();
+    debugPrint("Fetching Residents");
     for (var residentUrl in residentsUrls) {
       try {
-        debugPrint("Fetching Residents");
         final response = await http.get(
           Uri.parse(residentUrl),
         );

@@ -25,7 +25,6 @@ class _LocationListScreenState extends State<LocationListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
           leading: Icon(
             Icons.location_city,
             color: primaryColor,
