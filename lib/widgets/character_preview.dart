@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty_app/controllers/character_controller.dart';
 import 'package:rick_and_morty_app/models/character.dart';
 import 'package:rick_and_morty_app/screens/character_details_screen.dart';
 
 class CharacterPreview extends StatelessWidget {
   final Character character;
+  final CharacterController characterController;
 
-  const CharacterPreview({super.key, required this.character});
+  const CharacterPreview({
+    super.key,
+    required this.character,
+    required this.characterController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +20,10 @@ class CharacterPreview extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CharacterDetailsScreen(character: character),
+            builder: (context) => CharacterDetailsScreen(
+              character: character,
+              characterController: characterController,
+            ),
           ),
         );
       },

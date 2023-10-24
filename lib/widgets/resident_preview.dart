@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/models/character.dart';
 import 'package:rick_and_morty_app/screens/character_details_screen.dart';
 
+import '../controllers/character_controller.dart';
+
 class ResidentPreview extends StatelessWidget {
   final Character character;
 
@@ -14,7 +16,10 @@ class ResidentPreview extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CharacterDetailsScreen(character: character),
+            builder: (context) => CharacterDetailsScreen(
+              character: character,
+              characterController: CharacterController(),
+            ),
           ),
         );
       },

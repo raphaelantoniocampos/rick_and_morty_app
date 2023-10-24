@@ -57,7 +57,10 @@ class _CharacterScreenState extends State<CharacterListScreen> {
                 itemCount: _characterController.characters.length,
                 itemBuilder: (context, index) {
                   final character = _characterController.characters[index];
-                  return CharacterPreview(character: character);
+                  return CharacterPreview(
+                    character: character,
+                    characterController: _characterController,
+                  );
                 }),
           ),
         ],

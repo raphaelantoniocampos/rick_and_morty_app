@@ -12,7 +12,6 @@ class LocationController extends ChangeNotifier {
 
   Future<void> fetchLocations() async {
     try {
-      debugPrint("Fetching Locations");
       final response = await http.get(
         Uri.parse("https://rickandmortyapi.com/api/location"),
       );
@@ -27,14 +26,13 @@ class LocationController extends ChangeNotifier {
     } catch (e) {
       debugPrint('Error while fetching characters: $e');
       locations.clear();
-      notifyListeners();
-      fetchLocations();
+      // fetchLocations();
     }
+    notifyListeners();
   }
 
   Future<void> fetchResidents(residentsUrls) async {
     residents.clear();
-    debugPrint("Fetching Residents");
     for (var residentUrl in residentsUrls) {
       try {
         final response = await http.get(
@@ -48,7 +46,9 @@ class LocationController extends ChangeNotifier {
       } catch (e) {
         debugPrint('Error while fetching residents: $e');
       }
+      notifyListeners();
     }
+    // notifyListeners();
 
   }
 }
